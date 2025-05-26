@@ -1,0 +1,25 @@
+name: Deploy to DigitalOcean Droplet
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/deployer/holadigitalo
+            git pull origin main
+            docker build -t mi-app .
+            docker stop mi-contenedor || true
+            docker rm mi-contenedor || true
+            docker run -d --name mi-contenedor -p 80:80 mi-app

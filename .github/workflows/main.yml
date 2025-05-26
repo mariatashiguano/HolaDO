@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/deployer/holadigitalo
+            cd C:\Users\maria\VisualStudioCodeProjects\holadigitalo
             git pull origin main
             docker build -t mi-app .
             docker stop mi-contenedor || true

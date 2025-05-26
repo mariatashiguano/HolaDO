@@ -19,7 +19,7 @@ jobs:
           script: |
             cd C:\Users\maria\VisualStudioCodeProjects\holadigitalo
             git pull origin main
-            docker build -t mi-app .
-            docker stop mi-contenedor || true
-            docker rm mi-contenedor || true
-            docker run -d --name mi-contenedor -p 80:80 mi-app
+            docker build -t first_project .
+            docker stop prueba_do || true
+            docker rm prueba_do || true
+            docker run -d --name prueba_do -p 80:80 mi-app
